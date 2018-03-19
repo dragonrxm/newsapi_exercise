@@ -1,0 +1,51 @@
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<div class="page-header">
+    <h1>NewsService</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-8" style="margin-bottom: 15px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">News</h2>
+            </div>
+            <div class="panel-body">
+                <div  data-bind="foreach: news">
+                    <div class="row">
+                        <div class="col-sm-7 col-xs-5">
+                            <strong><span data-bind="text: Title"></span></strong>:
+                        </div>
+                        <div class="col-sm-3 col-xs-5">
+                            <span data-bind="text: moment(Date).format('LL')"></span>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <small><a href="#" data-bind="click: $parent.getNewsDetail">Details</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="button" id="loadBtn" data-bind="click: $root.getNewsRange" class="btn btn-success">Load More</button>
+            <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+        </div>
+    </div>
+    <!-- ko if:detail() -->
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Detail</h2>
+            </div>
+            <table class="table">
+                <tr><td>Title</td><td data-bind="text: detail().Title"></td></tr>
+                <tr><td>Content</td><td data-bind="text: detail().Content"></td></tr>
+                <tr><td>Date</td><td data-bind="text: moment(detail().Date).format('LL')"></td></tr>
+            </table>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
